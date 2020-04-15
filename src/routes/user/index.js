@@ -1,9 +1,11 @@
 const express = require("express");
-const User = require("../models/user");
+const User = require("../../models/user");
 const router = new express.Router();
+const version = process.env["API_VERSION"];
+const { ALLOWED_USER_FIELDS } = require("../../lib/constants");
 
 //Create User
-router.post("/users", async (req, res) => {
+router.post(`${version}/users`, async (req, res) => {
   const user = new User(req.body);
 
   try {
@@ -15,7 +17,7 @@ router.post("/users", async (req, res) => {
 });
 
 //Read all Users
-router.get("/users", async (req, res) => {
+router.get(`${version}/users`, async (req, res) => {
   try {
     const users = await User.find({});
     res.send(users);
@@ -25,7 +27,7 @@ router.get("/users", async (req, res) => {
 });
 
 //Read user by :id
-router.get("/users/:id", async (req, res) => {
+router.get(`${version}/users/:id`, async (req, res) => {
   const _id = req.params.id;
 
   try {
@@ -40,13 +42,12 @@ router.get("/users/:id", async (req, res) => {
 });
 
 //Update user
-router.patch("/users/:id", async (req, res) => {
+router.patch(`${version}/users/:id`, async (req, res) => {
   const _id = req.params.id;
   const update = req.body;
   const updatesArray = Object.keys(req.body);
-  const allowedUpdatesArray = ["email", "password", "isAdmin"];
   const isValidOperation = updatesArray.every((update) =>
-    allowedUpdatesArray.includes(update)
+    ALLOWED_USER_FIELDS.includes(update)
   );
 
   if (!isValidOperation) {
@@ -68,7 +69,7 @@ router.patch("/users/:id", async (req, res) => {
 });
 
 //Delete user
-router.delete("/users/:id", async (req, res) => {
+router.delete(`${version}/users/:id`, async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {

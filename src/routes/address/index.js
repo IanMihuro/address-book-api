@@ -1,9 +1,11 @@
 const express = require("express");
-const Address = require("../models/address");
+const Address = require("../../models/address");
 const router = new express.Router();
+const version = process.env["API_VERSION"];
+const { ALLOWED_ADDRESS_FIELDS } = require("../../lib/constants");
 
 //Create an Address
-router.post("/addresses", async (req, res) => {
+router.post(`${version}/addresses`, async (req, res) => {
   const address = new Address(req.body);
 
   try {
@@ -15,7 +17,7 @@ router.post("/addresses", async (req, res) => {
 });
 
 //Read all addresses
-router.get("/addresses", async (req, res) => {
+router.get(`${version}/addresses`, async (req, res) => {
   try {
     const addresses = await Address.find({});
     res.send(addresses);
@@ -25,7 +27,7 @@ router.get("/addresses", async (req, res) => {
 });
 
 //Read address by :id
-router.get("/addresses/:id", async (req, res) => {
+router.get(`${version}/addresses/:id`, async (req, res) => {
   const _id = req.params.id;
 
   try {
@@ -40,12 +42,12 @@ router.get("/addresses/:id", async (req, res) => {
 });
 
 //Update Address
-router.patch("/addresses/:id", async (req, res) => {
+router.patch(`${version}/addresses/:id`, async (req, res) => {
   const _id = req.params.id;
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "phoneNumber", "email", "postalAddress"];
+
   const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
+    ALLOWED_ADDRESS_FIELDS.includes(update)
   );
 
   if (!isValidOperation) {
@@ -67,7 +69,7 @@ router.patch("/addresses/:id", async (req, res) => {
 });
 
 //Delete address
-router.delete("/addresses/:id", async (req, res) => {
+router.delete(`${version}/addresses/:id`, async (req, res) => {
   try {
     const address = await Address.findByIdAndDelete(req.params.id);
     if (!address) {
