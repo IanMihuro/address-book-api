@@ -4,18 +4,6 @@ const { NotFoundError, MongooseValidationError } = require('./errors');
 const models = require('../models');
 const { publicRoutes, apiRoutes } = require('../routes');
 
-// const userRouter = require('./routes/user');
-// const addressRouter = require('./routes/address');
-// const heartbeatRouter = require('./routes/heartbeat');
-
-// const app = express();
-
-// app.use(express.json());
-// app.use(heartbeatRouter);
-// app.use(userRouter);
-// app.use(addressRouter);
-
-
 async function createApp() {
   try {
     const app = express();
