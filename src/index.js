@@ -1,18 +1,23 @@
-require("dotenv").config({ path: __dirname + "/.env" });
-const express = require("express");
-require("./config/db");
-const userRouter = require("./routes/user");
-const addressRouter = require("./routes/address");
-const heartbeatRouter = require("./routes/heartbeat");
+require('dotenv').config();
 
-const app = express();
+const createApp = require('./lib/createApp');
+
 const port = process.env.PORT || 3000;
+console.log(`MONGODB URI: ${process.env.MONGO_URI}`);
 
-app.use(express.json());
-app.use(heartbeatRouter);
-app.use(userRouter);
-app.use(addressRouter);
+async function main() {
+  try {
+    const app = await createApp();
 
-app.listen(port, () => {
-  console.log(`Server is up on port ${port}`);
-});
+    app.listen(port, () => {
+      console.log(`Server running on: http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.log('Problem occurred while starting Express app');
+    console.log(error);
+    process.exit(1);
+  }
+}
+
+module.exports = main();
+

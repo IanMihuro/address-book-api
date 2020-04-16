@@ -1,33 +1,10 @@
-const mongoose = require("mongoose");
-const validator = require("validator");
+const { AddressSchema } = require('./schema');
+// const hooks = require('./hooks');
+const methods = require('./methods');
 
-const addressSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  phoneNumber: {
-    type: String,
-    trim: true,
-  },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error("A valid email is required");
-      }
-    },
-  },
-  postalAddress: {
-    type: String,
-    trim: true,
-    lowercase: true,
-  },
-});
+// hooks(AddressSchema);
+methods(AddressSchema);
 
-const Address = mongoose.model("Address", addressSchema);
-
-module.exports = Address;
+module.exports = {
+  AddressSchema,
+};

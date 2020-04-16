@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = new express.Router();
-const { name, version } = require("../../../package");
+const { name, version } = require('../../../package');
 
 //GET '/heartbeat'
-router.get("/heartbeat", async (req, res) => {
+router.get('/heartbeat', async (req, res) => {
   try {
     const response = {
       name,

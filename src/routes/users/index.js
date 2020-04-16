@@ -1,8 +1,8 @@
-const express = require("express");
-const User = require("../../models/user");
+const express = require('express');
+const User = require('../../models/user');
 const router = new express.Router();
-const version = process.env["API_VERSION"];
-const { ALLOWED_USER_FIELDS } = require("../../lib/constants");
+const version = process.env['API_VERSION'];
+const { ALLOWED_USER_FIELDS } = require('../../lib/constants');
 
 //Create User
 router.post(`${version}/users`, async (req, res) => {
@@ -51,7 +51,7 @@ router.patch(`${version}/users/:id`, async (req, res) => {
   );
 
   if (!isValidOperation) {
-    return res.status(400).send({ error: "Invalid updates!" });
+    return res.status(400).send({ error: 'Invalid updates!' });
   }
 
   try {
