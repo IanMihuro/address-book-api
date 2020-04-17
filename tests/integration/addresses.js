@@ -39,6 +39,7 @@ describe('Address', () => {
       describe('validates against phone number characters', () => {
         it('throws a validation error when a phone has more than 16 characters', async () => {
           const address = seedDataToCreate();
+          address.phoneNumber = '180.989.7721.2382';
 
           const res = await request(server)
             .post(`${BASE_URL}/`)
