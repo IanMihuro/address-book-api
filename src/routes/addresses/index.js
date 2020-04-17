@@ -1,12 +1,16 @@
 const express = require('express');
 const { ALLOWED_ADDRESS_FIELDS } = require('../../lib/constants');
 const { NotFoundError } = require('../../lib/errors');
+const { addressSchema } = require('../helpers');
+const { celebrate } = require('celebrate');
 
 const router = new express.Router();
 const BASE_ROUTE = '/addresses';
 
 //Create an Address
-router.post(`${BASE_ROUTE}/`, async (req, res) => {
+router.post(`${BASE_ROUTE}/`, celebrate({
+  body: addressSchema,
+}), async (req, res) => {
   try {
     const { Address } = req.models;
     const { name } = req.body;

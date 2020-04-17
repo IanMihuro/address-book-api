@@ -4,9 +4,6 @@ const validator = require('validator');
 const { Schema } = mongoose;
 
 const AddressSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-  },
   name: {
     type: String,
     required: true,

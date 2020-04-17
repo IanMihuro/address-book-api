@@ -15,9 +15,18 @@ class NotFoundError extends Error {
   }
 }
 
+class JoiValidationError extends Error {
+  constructor(message) {
+    super(message);
+
+    this.name = 'JoiValidationError';
+  }
+}
+
 
 module.exports = {
   MongoDBError,
   NotFoundError,
   MongooseValidationError,
+  JoiValidationError,
 };

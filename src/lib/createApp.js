@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./db');
-const { NotFoundError, MongooseValidationError } = require('./errors');
+const { NotFoundError, MongooseValidationError, JoiValidationError } = require('./errors');
+const { errors } = require('celebrate');
 const models = require('../models');
 const { publicRoutes, apiRoutes } = require('../routes');
 
@@ -10,6 +11,7 @@ async function createApp() {
 
     app.use(express.json());
     // ROUTES MIDDLEWARE
+
     // error handling middleware
     app.use( async function(req, res, next) {
       try {
@@ -50,6 +52,8 @@ async function createApp() {
     // heartbeat & home route
     publicRoutes.forEach(r => app.use('/', r));
 
+    // handle Celebrate errors
+    app.use(errors());
 
     // connect to DB
     await db.connect();
