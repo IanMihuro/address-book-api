@@ -43,6 +43,19 @@ class DB {
     return mongoose.connect.collections;
   }
 
+  async clean() {
+    // drop databases after every test to speed up tests
+    try {
+      if(this.isConnected()) {
+        await mongoose.connection.dropDatabase();
+        console.log('[DB] Database Clean up completed');
+      }
+    } catch (error) {
+      console.log('[DB] There was an error dropping DB');
+      console.log(error);
+    }
+  }
+
   isConnected() {
     // mongoose.connection.readyState === 1 means there's a connection, 0 means it's not.
     return mongoose.connection.readyState === 1;

@@ -1,4 +1,4 @@
-const { ALLOWED_ADDRESS_FIELDS } = require('../../lib/constants');
+const { constants: { ALLOWED_ADDRESS_FIELDS } } = require('../../lib/');
 
 const fieldsToPick = ['_id', ...ALLOWED_ADDRESS_FIELDS];
 

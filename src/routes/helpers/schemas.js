@@ -1,5 +1,5 @@
 const { Joi } = require('celebrate');
-const { JoiValidationError } = require('../../lib/errors');
+const { errors: { JoiValidationError } } = require('../../lib');
 
 const addressSchema = Joi.object().keys({
   name: Joi.string()

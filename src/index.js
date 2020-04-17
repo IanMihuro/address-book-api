@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const createApp = require('./lib/createApp');
+const { createApp } = require('./lib');
 
 const port = process.env.PORT || 3000;
 console.log(`MONGODB URI: ${process.env.MONGO_URI}`);

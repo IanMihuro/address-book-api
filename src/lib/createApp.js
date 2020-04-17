@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./db');
-const { NotFoundError, MongooseValidationError, JoiValidationError } = require('./errors');
+const { NotFoundError, MongooseValidationError } = require('./errors');
 const { errors } = require('celebrate');
 const models = require('../models');
 const { publicRoutes, apiRoutes } = require('../routes');

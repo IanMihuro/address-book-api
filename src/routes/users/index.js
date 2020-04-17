@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('../../models/user');
 const router = new express.Router();
 const version = process.env['API_VERSION'];
-const { ALLOWED_USER_FIELDS } = require('../../lib/constants');
+const { constants: { ALLOWED_USER_FIELDS } } = require('../../lib');
 
 //Create User
 router.post(`${version}/users`, async (req, res) => {
