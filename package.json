@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "dev": "./node_modules/.bin/nodemon src/index.js",
     "lint": "eslint ./src --fix",
-    "test": ". ./tests/setup.sh && ./node_modules/.bin/mocha --recursive --timeout=10000 tests"
+    "test": ". ./tests/setup.sh && ./node_modules/.bin/mocha --recursive --timeout=10000 --exit tests"
   },
   "keywords": [],
   "author": "",
