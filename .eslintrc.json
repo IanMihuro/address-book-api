@@ -2,8 +2,14 @@
     "env": {
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
+    "plugins": [
+      "mocha",
+      "chai-expect",
+      "import"
+    ],
     "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",
@@ -12,11 +18,6 @@
     "parserOptions": {
         "ecmaVersion": 2018
     },
-    "plugins": [
-        "mocha",
-        "chai-expect",
-        "import"
-      ],
       "rules": {
         "object-curly-newline": "off",
         "brace-style": [
