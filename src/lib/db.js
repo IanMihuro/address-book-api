@@ -19,6 +19,7 @@ class DB {
     try {
       if(!this.isConnected()) {
         await mongoose.connect(this.uri, this.options);
+        console.log(`[DB] DB NAME: ${this.name()}`);
         console.log('[DB] MongoDB connected successfully');
       }
     } catch (error) {
@@ -39,20 +40,29 @@ class DB {
     }
   }
 
-  async collections() {
-    return mongoose.connect.collections;
-  }
-
   async clean() {
     // drop databases after every test to speed up tests
     try {
       if(this.isConnected()) {
+        console.log(`[DB] About to drop MongoDB name: ${this.name()}`)
         await mongoose.connection.dropDatabase();
         console.log('[DB] Database Clean up completed');
       }
     } catch (error) {
       console.log('[DB] There was an error dropping DB');
       console.log(error);
+    }
+  }
+
+  name() {
+    if (this.isConnected()) {
+      return mongoose.connection.db.databaseName;
+    }
+  }
+
+  collections() {
+    if (this.isConnected()) {
+      return mongoose.connection.db.listCollections();
     }
   }
 
