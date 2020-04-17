@@ -1,11 +1,7 @@
-const errors = require('./errors');
-const db = require('./db');
 const createApp = require('./createApp');
-const constants = require('./constants');
+const db = require('./db');
 
 module.exports = {
-  errors,
   db,
   createApp,
-  constants,
 };

@@ -1,8 +1,6 @@
 const express = require('express');
-const {
-  constants: { ALLOWED_ADDRESS_FIELDS },
-  errors: { NotFoundError },
-} = require('../../lib');
+const { ALLOWED_ADDRESS_FIELDS } = require('../../lib/constants')
+const { NotFoundError } = require('../../lib/errors')
 const { addressSchema } = require('../helpers');
 const { celebrate } = require('celebrate');
 
